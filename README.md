@@ -29,9 +29,18 @@ Output:
 Suppose j represents the sum that can be obtained from a subset of A[1..i], and DP[i][j] represents the number of A[i] that is not used to compose the sumof subset A[1..i]. The recurrence relation can be defined as:
 
 ```
+Set DP[0][0] = 0
+    DP[0][j] = -1 (1 <= j <= K)
+
 i) When j > A[i]:
 
-   DP[i][j] = DP[i-1][j]
+   a) when DP[i-1] >= 0
+
+      DP[i][j] = M[i] 
+
+   b) Otherwise
+
+      DP[i][j] = DP[i-1][j]
 
 ii) When j <= A[i]:
 
@@ -47,13 +56,6 @@ ii) When j <= A[i]:
 
       DP[i][j] = DP[i-1][j]
 ```
-
-Because if there exists a subset of sum j with 1 to i-1th elements of A, both DP[i][j] and DP[i][j + A[i-1]] are certainly true.
-
-If current element A[i-1] has value greater than j, the value cannot be added to the subset because the sum will be greater than j.
-Also, if the sum of the current subset is greater than j, no further calculation is needed because it does not satfifies the problem. 
-
-DP[i][0] is always true because the sum of the subset {} is always 0.
 
 ## Complexity Analysis
 

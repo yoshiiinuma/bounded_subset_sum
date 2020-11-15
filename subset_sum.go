@@ -39,17 +39,22 @@ func SubsetSum(A []int, M []int, K int) bool {
 func subsetSum(DP [][]int, A []int, M []int, K int) bool {
   N := len(A);
   var a int
-  for i := 1; i < N+1; i++ {
+  for i := 1; i <= N; i++ {
     a = A[i - 1]
     for j := 0; j <= K; j++ {
-      if DP[i-1][j] >= 0 {
-        DP[i][j] = M[i-1]
-      }
-      if j >= a {
-        if DP[i][j-a] >= 0 {
+      if j < a {
+        if DP[i-1][j] >= 0 {
+          DP[i][j] = M[i-1]
+        } else {
+          DP[i][j] = DP[i-1][j]
+        }
+      } else {
+        if DP[i-1][j] >= 0 {
+          DP[i][j] = M[i-1]
+        } else if DP[i][j-a] >= 0 {
           DP[i][j] = DP[i][j-a] - 1
         } else {
-          DP[i][j] = -1
+          DP[i][j] = DP[i-1][j]
         }
       }
     }

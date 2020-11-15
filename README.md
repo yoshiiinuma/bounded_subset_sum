@@ -18,9 +18,23 @@ Input:
 Output:
 
    True
- 
+
    There is a subset { 3, 8 } with sum 17
    17 = 3 * 3 + 8
+```
+
+```
+Input:
+
+  A = { 3, 5, 8 }
+  M = { 3, 2, 2 }
+  K = 12
+
+Output:
+
+   False
+
+   There is no such a subset with sum 12
 ```
 
 
@@ -36,7 +50,7 @@ i) When j > A[i]:
 
    a) when DP[i-1] >= 0
 
-      DP[i][j] = M[i] 
+      DP[i][j] = M[i]
 
    b) Otherwise
 
@@ -44,11 +58,11 @@ i) When j > A[i]:
 
 ii) When j <= A[i]:
 
-   a) When j == A[i]
+   a) when DP[i-1] >= 0
 
-      DP[i][j] = M[i] 
+      DP[i][j] = M[i]
 
-   b) When j < A[i]
+   b) when DP[i-A[i]] >= 0
 
       DP[i][j] = DP[i][j - A[i]] - 1
 
